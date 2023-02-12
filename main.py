@@ -1,21 +1,24 @@
 import streamlit as st
+st.set_page_config(
+    page_title="Misiowy Miszmasz",
 
-def zrob_checki(boxy):
-    for i in boxy:
-        st.checkbox(i, key='kkk' + i)
+)
 
-def get_selected_checkboxes():
-    return [str(i) for i in st.session_state.keys() if i.startswith('kkk') and st.session_state[i]]
+st.title('Misiowy Miszmasz')
+st.write("Zamiast rozwalać naukę na kilka/nascie mikro projektow, zrobie z tego swego rodzaju playground")
+st.sidebar.success("Wybierz podstrone/subprojekt")
 
+if "my_input" not in st.session_state:
+    st.session_state["my_input"] = ""
 
+my_input = st.text_input("Wpisz tu cokolwiek i zatwierdz przyciskiem. Powinno sie to pojawic na stronie Variable Transfer", st.session_state["my_input"])
+submit = st.button("Przycisk")
+czysc = st.button("Wyczyść")
 
-st.header('checkboxy:')
+if czysc:
+    st.session_state["my_input"]=""
+    my_input=""
 
-boxy = ['jeden', 'dwa', 'trzy', 'cztery', 'pięć']
-zrob_checki(boxy)
-
-
-st.write(st.session_state)
-st.write(st.session_state.keys())
-st.write(get_selected_checkboxes())
-print(get_selected_checkboxes())
+if submit:
+    st.session_state["my_input"]=my_input
+    st.write("Teraz sprawdz Variable Transfer")
